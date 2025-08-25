@@ -1,1 +1,12 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+html {
+  scrollbar-gutter: stable;
+}
+
+#app {
+  min-height: 100lvh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

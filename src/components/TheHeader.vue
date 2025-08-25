@@ -1,6 +1,6 @@
 <template>
-  <header class="flex items-center justify-center bg-[#252525] py-3">
-    <div class="flex items-center justify-between w-full container">
+  <header class="sticky top-0 z-10 flex items-center justify-center bg-[#252525]">
+    <div class="flex items-center justify-between w-full container py-3 px-4">
       <router-link to="/">
         <img class="w-10" src="@/assets/logo.svg" alt="" />
       </router-link>

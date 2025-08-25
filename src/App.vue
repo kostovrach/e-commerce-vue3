@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <main class="">
+  <main class="grow container py-8 px-4 mx-auto">
     <RouterView />
   </main>
   <TheFooter />

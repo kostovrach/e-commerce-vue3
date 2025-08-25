@@ -6,27 +6,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/HomeView.vue'),
+      component: () => import('../views/home/HomeView.vue'),
     },
     {
       path: '/cart',
       name: 'cart',
-      component: () => import('../views/CartView.vue'),
+      component: () => import('../views/cart/CartView.vue'),
     },
     {
       path: '/favorites',
       name: 'favorites',
-      component: () => import('../views/FavoritesView.vue'),
+      component: () => import('../views/favorites/FavoritesView.vue'),
     },
     {
       path: '/product/:id',
       name: 'product-item',
-      component: () => import('../views/ProductView.vue'),
+      component: () => import('../views/product/ProductView.vue'),
     },
     {
       path: '/:catchAll(.*)',
       name: 'not-found',
-      component: () => import('../views/NotFoundView.vue'),
+      component: () => import('../views/notFound/NotFoundView.vue'),
     },
   ],
 })
