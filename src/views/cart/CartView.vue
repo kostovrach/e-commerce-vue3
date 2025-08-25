@@ -1,7 +1,7 @@
 <template>
   <div>
     <Title>Корзина</Title>
-    <Loader v-if="pending"/>
+    <Loader v-if="pending" />
 
     <div v-else class="flex flex-wrap gap-2">
       <Product
@@ -26,13 +26,17 @@ export default {
     const pending = ref(true)
     const products = ref([])
 
-    onMounted(() => {
+    const getData = () => {
       setTimeout(() => {
         const data = localStorage.getItem('cart')
 
         products.value.push(JSON.parse(data))
+        
         pending.value = false
       }, 1000)
+    }
+    onMounted(() => {
+      getData()
     })
     return {
       products,

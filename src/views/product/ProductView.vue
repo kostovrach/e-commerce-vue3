@@ -42,7 +42,13 @@
         </div>
         <div class="flex gap-2">
           <ButtonFill @click="addCart(product)" class="w-100">В корзину</ButtonFill>
-          <ButtonStroke @click="addFavorites(product)" class="w-100 gap-2">В избранное</ButtonStroke>
+          <ButtonStroke
+            @click="changeValue(product)"
+            :class="product?.isFavorite ? 'selected' : ''"
+            class="w-100 gap-2"
+          >
+            В избранное
+          </ButtonStroke>
         </div>
       </div>
     </div>
@@ -50,47 +56,63 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { getProduct } from '@/api/products'
+import { useProduct } from '@/stores/product'
+import { useFavorites } from '@/stores/favoritesProducts'
+
 import Product from '@/components/product/Product.vue'
 import Title from '@/components/title/Title.vue'
 import Loader from '@/components/loader/Loader.vue'
 import ButtonFill from '@/components/buttonFill/ButtonFill.vue'
 import ButtonStroke from '@/components/buttonStroke/ButtonStroke.vue'
+
 export default {
   components: { Product, Title, Loader, ButtonFill, ButtonStroke },
 
   setup() {
+    // data
+    const productStore = useProduct()
+    const favoritesStore = useFavorites()
     const route = useRoute()
-    const pending = ref(true)
-    const product = ref([])
 
-    const getData = async () => {
-      try {
-        product.value = await getProduct(route.params.id)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        pending.value = false
+    // computed
+    const pending = computed(() => {
+      return productStore.pending
+    })
+    const product = computed(() => {
+      return productStore.product
+    })
+
+    // methods
+    const { getData } = productStore
+    const { toggleFavorite } = useFavorites()
+
+    const changeValue = (item) => {
+      if (item?.isFavorite) {
+        item.isFavorite = false
       }
+      toggleFavorite(item)
     }
-
-    const addFavorites = (product) => {
-      localStorage.setItem('favorites', JSON.stringify(product))
-    }
-
     const addCart = (product) => {
       localStorage.setItem('cart', JSON.stringify(product))
     }
 
     onMounted(async () => {
-      await getData()
+      await getData(route.params.id)
+
+      if (localStorage.getItem('favorites')) {
+        const items = JSON.parse(localStorage.getItem('favorites'))
+
+        if (items.find((el) => el.id === product.value.id)) {
+          product.value.isFavorite = true
+        }
+      }
     })
     return {
       product,
       pending,
-      addFavorites,
+      changeValue,
       addCart,
     }
   },

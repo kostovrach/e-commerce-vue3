@@ -15,29 +15,44 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
-import { getProducts, getProduct } from '@/api/products'
+import { onMounted, computed } from 'vue'
+import { useProducts } from '@/stores/products'
+
 import Product from '@/components/product/Product.vue'
 import Title from '@/components/title/Title.vue'
 import Loader from '@/components/loader/Loader.vue'
+
 export default {
   components: { Product, Title, Loader },
 
   setup() {
-    const pending = ref(true)
-    const products = ref([])
+    // data
+    const productStore = useProducts()
 
-    const getData = async () => {
-      try {
-        products.value = await getProducts()
-      } catch (err) {
-        console.error(err)
-      } finally {
-        pending.value = false
-      }
-    }
+    // computed
+    const pending = computed(() => {
+      return productStore.pending
+    })
+    const products = computed(() => {
+      return productStore.products
+    })
+
+    // methods
+    const { getData } = productStore
+
+    // hooks
     onMounted(async () => {
       await getData()
+
+      if (localStorage.getItem('favorites')) {
+        const items = JSON.parse(localStorage.getItem('favorites'))
+
+        products.value.forEach((element) => {
+          if (items.find((el) => el.id === element.id)) {
+            element.isFavorite = true
+          }
+        })
+      }
     })
     return {
       products,
@@ -46,5 +61,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

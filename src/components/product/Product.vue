@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-between gap-4 bg-[#252525]">
     <router-link :to="`/product/${item.id}`" class="flex flex-col justify-between gap-4">
       <img class="h-48 mx-auto object-contain" :src="item.image" :alt="item.title" />
-      <h3 class="font-semibold text-xl line-clamp-2">
+      <h3 class="font-semibold text-xl line-clamp-2 min-h-[2.5em]">
         {{ item.title }}
       </h3>
       <div class="flex justify-between w-full">
@@ -14,7 +14,6 @@
             {{ '$' + (item.price + 10).toFixed(2) }}
           </span>
         </div>
-
         <div class="flex justify-end gap-2">
           <div class="flex items-center gap-1">
             <vue-feather
@@ -39,26 +38,39 @@
     </router-link>
     <div class="flex gap-2">
       <ButtonFill @click="addCart(item)" class="w-100">В корзину</ButtonFill>
-      <ButtonStroke @click="addFavorites(item)"></ButtonStroke>
+      <ButtonStroke @click="changeValue(item)" :class="item?.isFavorite ? 'selected' : ''"></ButtonStroke>
     </div>
   </div>
 </template>
 
 <script>
+import { useFavorites } from '@/stores/favoritesProducts'
+
 import ButtonFill from '@/components/buttonFill/ButtonFill.vue'
 import ButtonStroke from '@/components/buttonStroke/ButtonStroke.vue'
 
 export default {
   components: { ButtonFill, ButtonStroke },
+
   props: {
     item: {
       type: Object,
       default: null,
     },
   },
+
   setup() {
-    const addFavorites = (item) => {
-      localStorage.setItem('favorites', JSON.stringify(item))
+    // data
+    const favoritesStore = useFavorites()
+
+    // methods
+    const { toggleFavorite } = favoritesStore;
+
+    const changeValue = (item) => {
+      if (item?.isFavorite) {
+        item.isFavorite = false
+      }
+      toggleFavorite(item)
     }
 
     const addCart = (item) => {
@@ -66,7 +78,8 @@ export default {
     }
 
     return {
-      addFavorites,
+      changeValue,
+      toggleFavorite,
       addCart,
     }
   },
