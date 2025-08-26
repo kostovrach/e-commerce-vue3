@@ -17,7 +17,7 @@
         <span class="text-4xl opacity-50">Нет избранных товаров</span>
         <router-link to="/" class="flex items-center gap-1 p-3 border border-[#00C37A] rounded-lg">
           <p class="text-lg">Перейти в каталог</p>
-          <vue-feather type="corner-down-left"/>
+          <vue-feather type="corner-down-left" />
         </router-link>
       </div>
     </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
 import { useFavorites } from '@/stores/favoritesProducts'
 
 import Product from '@/components/product/Product.vue'
@@ -47,15 +47,7 @@ export default {
       return favoritesStore.products
     })
 
-    // methods
-    const { getData } = favoritesStore
-    onMounted(() => {
-      getData()
-    })
-    return {
-      products,
-      pending,
-    }
+    return { products, pending }
   },
 }
 </script>

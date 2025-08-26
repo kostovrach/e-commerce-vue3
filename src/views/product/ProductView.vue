@@ -41,7 +41,7 @@
           </span>
         </div>
         <div class="flex gap-2">
-          <ButtonFill @click="addCart(product)" class="w-100">В корзину</ButtonFill>
+          <ButtonFill @click="addProduct(product)" class="w-100">В корзину</ButtonFill>
           <ButtonStroke
             @click="changeValue(product)"
             :class="product?.isFavorite ? 'selected' : ''"
@@ -60,6 +60,7 @@ import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useProduct } from '@/stores/product'
 import { useFavorites } from '@/stores/favoritesProducts'
+import { useCart } from '@/stores/cartProducts'
 
 import Product from '@/components/product/Product.vue'
 import Title from '@/components/title/Title.vue'
@@ -74,6 +75,7 @@ export default {
     // data
     const productStore = useProduct()
     const favoritesStore = useFavorites()
+    const cartStore = useCart()
     const route = useRoute()
 
     // computed
@@ -86,16 +88,14 @@ export default {
 
     // methods
     const { getData } = productStore
-    const { toggleFavorite } = useFavorites()
+    const { toggleFavorite } = favoritesStore
+    const { addProduct } = cartStore
 
     const changeValue = (item) => {
       if (item?.isFavorite) {
         item.isFavorite = false
       }
       toggleFavorite(item)
-    }
-    const addCart = (product) => {
-      localStorage.setItem('cart', JSON.stringify(product))
     }
 
     onMounted(async () => {
@@ -109,12 +109,7 @@ export default {
         }
       }
     })
-    return {
-      product,
-      pending,
-      changeValue,
-      addCart,
-    }
+    return { product, pending, changeValue, addProduct }
   },
 }
 </script>

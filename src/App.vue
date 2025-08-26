@@ -7,9 +7,28 @@
 </template>
 
 <script>
-import TheHeader from './components/TheHeader.vue'
-import TheFooter from './components/TheFooter.vue'
+import { onMounted } from 'vue'
+import { useFavorites } from '@/stores/favoritesProducts'
+import { useCart } from './stores/cartProducts'
+
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
+
 export default {
   components: { TheHeader, TheFooter },
+  setup() {
+    // data
+    const favoritesStore = useFavorites()
+    const cartStore = useCart()
+
+    // methods
+    const { getData } = favoritesStore
+    const { getDataCart } = cartStore
+
+    onMounted(() => {
+      getData()
+      getDataCart()
+    })
+  },
 }
 </script>

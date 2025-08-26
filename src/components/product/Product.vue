@@ -37,14 +37,18 @@
       </div>
     </router-link>
     <div class="flex gap-2">
-      <ButtonFill @click="addCart(item)" class="w-100">В корзину</ButtonFill>
-      <ButtonStroke @click="changeValue(item)" :class="item?.isFavorite ? 'selected' : ''"></ButtonStroke>
+      <ButtonFill @click="addProduct(item)" class="w-full">В корзину</ButtonFill>
+      <ButtonStroke
+        @click="changeValue(item)"
+        :class="item?.isFavorite ? 'selected' : ''"
+      ></ButtonStroke>
     </div>
   </div>
 </template>
 
 <script>
 import { useFavorites } from '@/stores/favoritesProducts'
+import { useCart } from '@/stores/cartProducts'
 
 import ButtonFill from '@/components/buttonFill/ButtonFill.vue'
 import ButtonStroke from '@/components/buttonStroke/ButtonStroke.vue'
@@ -62,9 +66,11 @@ export default {
   setup() {
     // data
     const favoritesStore = useFavorites()
+    const cartStore = useCart()
 
     // methods
-    const { toggleFavorite } = favoritesStore;
+    const { toggleFavorite } = favoritesStore
+    const { addProduct } = cartStore
 
     const changeValue = (item) => {
       if (item?.isFavorite) {
@@ -73,15 +79,7 @@ export default {
       toggleFavorite(item)
     }
 
-    const addCart = (item) => {
-      localStorage.setItem('cart', JSON.stringify(item))
-    }
-
-    return {
-      changeValue,
-      toggleFavorite,
-      addCart,
-    }
+    return { changeValue, toggleFavorite, addProduct }
   },
 }
 </script>

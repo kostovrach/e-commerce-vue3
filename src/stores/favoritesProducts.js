@@ -34,8 +34,6 @@ export const useFavorites = defineStore('favorites', () => {
     localStorage.setItem('favorites', JSON.stringify(products.value))
   }
 
-  getData();
-
   return { pending, products, counter, getData, toggleFavorite }
 })
 

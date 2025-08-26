@@ -1,5 +1,5 @@
 <template>
-  <div class="button-stroke flex justify-center items-center p-2 rounded-lg border cursor-pointer" tabindex="0">
+  <div class="button-stroke flex justify-center items-center p-2 rounded-lg border cursor-pointer select-none text-shadow-lg" tabindex="0">
     <vue-feather type="heart" fill="white" class="h-[20px] cursor-pointer aspect-square" />
     <vue-feather type="heart" class="h-[20px] cursor-pointer aspect-square" />
     <span class="font-semibold"><slot></slot></span>

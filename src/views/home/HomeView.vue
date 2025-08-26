@@ -54,10 +54,7 @@ export default {
         })
       }
     })
-    return {
-      products,
-      pending,
-    }
+    return { products, pending }
   },
 }
 </script>
