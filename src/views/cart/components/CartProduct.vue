@@ -36,7 +36,7 @@
       </div>
       <div class="flex items-center justify-between gap-6 mt-4">
         <div
-          class="flex justify-between items-center w-48 bg-[#00C37A] py-1 px-4 rounded-lg select-none text-shadow-lg"
+          class="flex justify-between items-center w-48 text-[var(--p-zinc-50)] bg-[var(--p-zinc-950)] py-1 px-4 rounded-lg select-none text-shadow-lg"
         >
           <button
             class="appearance-none flex justify-center items-center"

@@ -8,10 +8,10 @@ import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
 import { definePreset } from '@primeuix/themes'
-import Lara from '@primeuix/themes/lara'
+import Nora from '@primeuix/themes/nora'
 
 const app = createApp(App)
-const preset = definePreset(Lara, {
+const preset = definePreset(Nora, {
   semantic: {
     primary: {
       50: '{zinc.50}',

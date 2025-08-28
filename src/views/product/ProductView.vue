@@ -45,8 +45,9 @@
             @click="changeCartData(product)"
             :class="product?.inCart ? 'selected' : ''"
             class="w-100"
-            >В корзину</ButtonFill
           >
+            {{ product?.inCart ? 'В корзине' : 'В корзину' }}
+          </ButtonFill>
           <ButtonStroke
             @click="changeValue(product)"
             :class="product?.isFavorite ? 'selected' : ''"

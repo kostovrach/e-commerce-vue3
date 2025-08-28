@@ -2,21 +2,23 @@
   <Title>Главная страница</Title>
   <Loader v-if="pending" />
 
-  <div v-else class="flex flex-col gap-12 mt-24">
+  <div v-else class="flex flex-col gap-4 mt-18">
     <div v-for="category in categories" :key="category">
       <router-link to="/catalog" class="flex items-center gap-0.5 mb-6 w-fit">
-        <h2 class="font-semibold text-lg">{{ category.toUpperCase() }}</h2>
+        <h2 class="font-bold text-lg">{{ category.toUpperCase() }}</h2>
         <vue-feather type="chevron-right"></vue-feather>
       </router-link>
       <Carousel :value="productsByCategory[category]" :numVisible="3" :numScroll="1">
         <template #item="slotProps">
-          <div class="flex flex-col justify-between gap-4 mr-4 p-6 bg-[#252525]">
+          <div
+            class="flex flex-col justify-between gap-4 mr-4 p-6 box-border border border-[var(--p-zinc-950)] rounded-lg"
+          >
             <router-link
               :to="`/product/${slotProps.data.id}`"
               class="flex flex-col justify-between gap-4"
             >
               <img
-                class="h-48 mx-auto object-contain"
+                class="h-32 mx-auto object-contain"
                 :src="slotProps.data.image"
                 :alt="slotProps.data.title"
               />
@@ -60,7 +62,7 @@
                 class="w-full"
                 :class="slotProps.data?.inCart ? 'selected' : ''"
               >
-                В корзину
+                {{ slotProps.data?.inCart ? 'В корзине' : 'В корзину' }}
               </ButtonFill>
               <ButtonStroke
                 @click="changeValue(slotProps.data)"

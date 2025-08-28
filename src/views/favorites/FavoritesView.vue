@@ -13,11 +13,11 @@
     </div>
 
     <div v-else class="grow w-full h-full flex justify-center items-center">
-      <div class="flex flex-col items-center gap-8">
-        <span class="text-4xl opacity-50">Нет избранных товаров</span>
-        <router-link to="/" class="flex items-center gap-1 p-3 border border-[#00C37A] rounded-lg">
-          <p class="text-lg">Перейти в каталог</p>
-          <vue-feather type="corner-down-left" />
+      <div class="flex flex-col items-center gap-4">
+        <span class="text-3xl font-semibold opacity-60">Нет избранных товаров</span>
+        <router-link to="/" class="flex items-center gap-1 py-2 px-4 border border-[var(--p-zinc-950)] rounded-lg">
+          <p class="font-semibold">Перейти в каталог</p>
+          <vue-feather type="corner-down-left" class="w-4" />
         </router-link>
       </div>
     </div>

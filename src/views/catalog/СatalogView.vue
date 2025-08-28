@@ -3,7 +3,7 @@
     <Title>Каталог товаров</Title>
     <Loader v-if="pending" />
 
-    <div v-else class="flex flex-wrap gap-2">
+    <div v-else class="flex flex-wrap gap-4">
       <Product
         v-for="product in products"
         :key="product.id"

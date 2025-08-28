@@ -5,7 +5,6 @@
       <h3 class="font-semibold text-xl line-clamp-2 min-h-[2.5em]">
         {{ item.title }}
       </h3>
-      <!-- {{ item }} -->
       <div class="flex justify-between w-full">
         <div class="flex items-start gap-1">
           <span class="font-semibold text-xl">
@@ -42,12 +41,11 @@
         @click="changeCartData(item)"
         class="w-full"
         :class="item?.inCart ? 'selected' : ''"
-        >В корзину</ButtonFill
       >
-      <ButtonStroke
-        @click="changeValue(item)"
-        :class="item?.isFavorite ? 'selected' : ''"
-      ></ButtonStroke>
+        {{ item?.inCart ? 'В корзине' : 'В корзину' }}
+      </ButtonFill>
+      <ButtonStroke @click="changeValue(item)" :class="item?.isFavorite ? 'selected' : ''">
+      </ButtonStroke>
     </div>
   </div>
 </template>
