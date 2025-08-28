@@ -41,7 +41,12 @@
           </span>
         </div>
         <div class="flex gap-2">
-          <ButtonFill @click="addProduct(product)" class="w-100">В корзину</ButtonFill>
+          <ButtonFill
+            @click="changeCartData(product)"
+            :class="product?.inCart ? 'selected' : ''"
+            class="w-100"
+            >В корзину</ButtonFill
+          >
           <ButtonStroke
             @click="changeValue(product)"
             :class="product?.isFavorite ? 'selected' : ''"
@@ -98,6 +103,15 @@ export default {
       toggleFavorite(item)
     }
 
+    const changeCartData = (item) => {
+      if (item?.inCart) {
+        return
+      } else {
+        item.inCart = true
+      }
+      addProduct(item)
+    }
+
     onMounted(async () => {
       await getData(route.params.id)
 
@@ -108,8 +122,16 @@ export default {
           product.value.isFavorite = true
         }
       }
+
+      if (localStorage.getItem('cart')) {
+        const items = JSON.parse(localStorage.getItem('cart'))
+
+        if (items.find((el) => el.id === product.value.id)) {
+          product.value.inCart = true
+        }
+      }
     })
-    return { product, pending, changeValue, addProduct }
+    return { product, pending, changeValue, addProduct, changeCartData }
   },
 }
 </script>

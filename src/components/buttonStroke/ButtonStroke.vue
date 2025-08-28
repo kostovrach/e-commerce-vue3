@@ -1,6 +1,6 @@
 <template>
   <div class="button-stroke flex justify-center items-center p-2 rounded-lg border cursor-pointer select-none text-shadow-lg" tabindex="0">
-    <vue-feather type="heart" fill="white" class="h-[20px] cursor-pointer aspect-square" />
+    <vue-feather type="heart" fill="white" stroke="white" class="cursor-pointer aspect-square" />
     <vue-feather type="heart" class="h-[20px] cursor-pointer aspect-square" />
     <span class="font-semibold"><slot></slot></span>
   </div>
@@ -11,18 +11,6 @@
 
   .vue-feather:has(svg:not([fill='none'])) {
     display: none;
-  }
-
-  @media (pointer: fine) {
-    &:not(.selected):hover {
-      .vue-feather:has(svg:not([fill='none'])) {
-        display: block;
-      }
-
-      .vue-feather:has(svg[fill='none']) {
-        display: none;
-      }
-    }
   }
 
   &.selected {

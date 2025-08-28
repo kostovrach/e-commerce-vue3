@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-col justify-between gap-4 bg-[#252525]">
-    <router-link :to="`/product/${item.id}`" class="flex flex-col justify-between gap-4">
+  <div class="flex flex-col justify-between gap-4 box-border border border-[var(--p-zinc-950)]">
+    <router-link :to="`/product/${item.id}`" class="flex flex-col justify-between gap-8">
       <img class="h-48 mx-auto object-contain" :src="item.image" :alt="item.title" />
       <h3 class="font-semibold text-xl line-clamp-2 min-h-[2.5em]">
         {{ item.title }}
       </h3>
+      <!-- {{ item }} -->
       <div class="flex justify-between w-full">
         <div class="flex items-start gap-1">
           <span class="font-semibold text-xl">
@@ -37,7 +38,12 @@
       </div>
     </router-link>
     <div class="flex gap-2">
-      <ButtonFill @click="addProduct(item)" class="w-full">В корзину</ButtonFill>
+      <ButtonFill
+        @click="changeCartData(item)"
+        class="w-full"
+        :class="item?.inCart ? 'selected' : ''"
+        >В корзину</ButtonFill
+      >
       <ButtonStroke
         @click="changeValue(item)"
         :class="item?.isFavorite ? 'selected' : ''"
@@ -79,9 +85,16 @@ export default {
       toggleFavorite(item)
     }
 
-    return { changeValue, toggleFavorite, addProduct }
+    const changeCartData = (item) => {
+      if (item?.inCart) {
+        return
+      } else {
+        item.inCart = true
+      }
+      addProduct(item)
+    }
+
+    return { changeValue, toggleFavorite, addProduct, changeCartData }
   },
 }
 </script>
-
-<style lang="scss" scoped></style>
