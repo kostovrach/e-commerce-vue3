@@ -82,6 +82,7 @@ import { onMounted, computed } from 'vue'
 import { useCategories } from '@/stores/categories'
 import { useFavorites } from '@/stores/favoritesProducts'
 import { useCart } from '@/stores/cartProducts'
+import { useToast } from 'primevue/usetoast'
 
 import Carousel from 'primevue/carousel'
 import Product from '@/components/product/Product.vue'
@@ -98,6 +99,7 @@ export default {
     const categoriesStore = useCategories()
     const favoritesStore = useFavorites()
     const cartStore = useCart()
+    const toast = useToast()
 
     // computed
     const pending = computed(() => {
@@ -127,7 +129,22 @@ export default {
     const changeValue = (item) => {
       if (item?.isFavorite) {
         item.isFavorite = false
+
+        toast.add({
+          severity: 'contrast',
+          icon: 'frown',
+          summary: 'Товар удален из избранного',
+          life: 3000,
+        })
+      } else if (!item?.isFavorite) {
+        toast.add({
+          severity: 'contrast',
+          icon: 'heart',
+          summary: 'Товар добавлен в избранное',
+          life: 3000,
+        })
       }
+
       toggleFavorite(item)
     }
 
@@ -136,6 +153,13 @@ export default {
         return
       } else {
         item.inCart = true
+
+        toast.add({
+          severity: 'contrast',
+          icon: 'shopping-bag',
+          summary: 'Товар добавлен в корзину',
+          life: 3000,
+        })
       }
       addProduct(item)
     }

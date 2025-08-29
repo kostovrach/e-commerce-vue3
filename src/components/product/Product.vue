@@ -53,6 +53,7 @@
 <script>
 import { useFavorites } from '@/stores/favoritesProducts'
 import { useCart } from '@/stores/cartProducts'
+import { useToast } from 'primevue/usetoast'
 
 import ButtonFill from '@/components/buttonFill/ButtonFill.vue'
 import ButtonStroke from '@/components/buttonStroke/ButtonStroke.vue'
@@ -71,6 +72,7 @@ export default {
     // data
     const favoritesStore = useFavorites()
     const cartStore = useCart()
+    const toast = useToast()
 
     // methods
     const { toggleFavorite } = favoritesStore
@@ -79,7 +81,22 @@ export default {
     const changeValue = (item) => {
       if (item?.isFavorite) {
         item.isFavorite = false
+
+        toast.add({
+          severity: 'contrast',
+          icon: 'frown',
+          summary: 'Товар удален из избранного',
+          life: 3000,
+        })
+      } else if (!item?.isFavorite) {
+        toast.add({
+          severity: 'contrast',
+          icon: 'heart',
+          summary: 'Товар добавлен в избранное',
+          life: 3000,
+        })
       }
+
       toggleFavorite(item)
     }
 
@@ -88,6 +105,13 @@ export default {
         return
       } else {
         item.inCart = true
+
+        toast.add({
+          severity: 'contrast',
+          icon: 'shopping-bag',
+          summary: 'Товар добавлен в корзину',
+          life: 3000,
+        })
       }
       addProduct(item)
     }

@@ -5,10 +5,10 @@ export const useCart = defineStore('cart', () => {
   const pending = ref(true)
   const products = ref([])
   const counter = computed(() => {
-    let total = 0;
+    let total = 0
 
     products.value.map((item) => {
-        total = total + item?.quantity
+      total = total + item?.quantity
     })
     return total
   })
@@ -41,14 +41,14 @@ export const useCart = defineStore('cart', () => {
 
   const addQty = (index) => {
     if (products.value[index].quantity !== 100) {
-        products.value[index].quantity++
+      products.value[index].quantity++
     }
     localStorage.setItem('cart', JSON.stringify(products.value))
   }
 
   const removeQty = (index) => {
     if (products.value[index].quantity !== 1) {
-        products.value[index].quantity--
+      products.value[index].quantity--
     }
     localStorage.setItem('cart', JSON.stringify(products.value))
   }
@@ -61,7 +61,13 @@ export const useCart = defineStore('cart', () => {
     localStorage.setItem('cart', JSON.stringify(products.value))
   }
 
-  return { pending, products, counter, getDataCart, addProduct, removeProduct, addQty, removeQty }
+  const clearCart = () => {
+    products.value = []
+    
+    localStorage.setItem('cart', [])
+  }
+
+  return { pending, products, counter, getDataCart, addProduct, removeProduct, addQty, removeQty, clearCart }
 })
 
 if (import.meta.hot) {

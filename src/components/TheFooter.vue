@@ -21,7 +21,7 @@
           <li class="opacity-60 mt-1"><router-link to="/catalog">Каталог товаров</router-link></li>
           <li class="opacity-60 mt-1"><router-link to="/cart">Корзина</router-link></li>
           <li class="opacity-60 mt-1"><router-link to="/favorites">Избранное</router-link></li>
-          <li class="opacity-60 mt-1"><router-link to="/dasgasdg">404</router-link></li>
+          <li class="opacity-60 mt-1"><router-link to="/invalid-path">404</router-link></li>
         </ul>
       <p class="opacity-50 py-3 border-t mt-12">&copy; E-commerce Все права защищены</p>
     </div>

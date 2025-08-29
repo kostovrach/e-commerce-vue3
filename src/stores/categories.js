@@ -6,7 +6,6 @@ import { getProducts } from '@/api/products'
 export const useCategories = defineStore('categories', () => {
   const pending = ref(true)
   const products = ref([])
-
   const categories = ref([])
 
   const getData = async () => {

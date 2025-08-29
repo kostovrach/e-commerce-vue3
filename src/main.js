@@ -7,8 +7,9 @@ import VueFeather from 'vue-feather'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
-import { definePreset } from '@primeuix/themes'
 import Nora from '@primeuix/themes/nora'
+import { definePreset } from '@primeuix/themes'
+import ToastService from 'primevue/toastservice';
 
 const app = createApp(App)
 const preset = definePreset(Nora, {
@@ -30,7 +31,8 @@ const preset = definePreset(Nora, {
 })
 
 app.use(createPinia())
-app.use(router)
+app.use(router),
+app.use(ToastService);
 app.use(PrimeVue, {
   theme: {
     preset: preset,
