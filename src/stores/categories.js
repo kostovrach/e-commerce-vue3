@@ -8,7 +8,7 @@ export const useCategories = defineStore('categories', () => {
   const products = ref([])
   const categories = ref([])
 
-  const getData = async () => {
+  const getDataCategories = async () => {
     try {
       products.value = await getProducts()
 
@@ -24,7 +24,7 @@ export const useCategories = defineStore('categories', () => {
     }
   }
 
-  return { pending, products, categories, getData }
+  return { pending, products, categories, getDataCategories }
 })
 
 if (import.meta.hot) {

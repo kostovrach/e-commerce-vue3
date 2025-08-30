@@ -8,7 +8,7 @@ export const useFavorites = defineStore('favorites', () => {
     return products.value.length
   })
 
-  const getData = () => {
+  const getDataFavorites = () => {
     setTimeout(() => {
       if (localStorage.getItem('favorites')) {
         products.value = JSON.parse(localStorage.getItem('favorites'))
@@ -17,7 +17,7 @@ export const useFavorites = defineStore('favorites', () => {
       }
 
       pending.value = false
-    }, 1000)
+    }, 1500)
   }
 
   const toggleFavorite = (item) => {
@@ -34,7 +34,7 @@ export const useFavorites = defineStore('favorites', () => {
     localStorage.setItem('favorites', JSON.stringify(products.value))
   }
 
-  return { pending, products, counter, getData, toggleFavorite }
+  return { pending, products, counter, getDataFavorites, toggleFavorite }
 })
 
 if (import.meta.hot) {

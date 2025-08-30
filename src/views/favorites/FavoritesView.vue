@@ -15,7 +15,10 @@
     <div v-else class="grow w-full h-full flex justify-center items-center">
       <div class="flex flex-col items-center gap-4">
         <span class="text-3xl font-semibold opacity-60">Нет избранных товаров</span>
-        <router-link to="/" class="flex items-center gap-1 py-2 px-4 border border-[var(--p-zinc-950)] rounded-lg">
+        <router-link
+          to="/"
+          class="flex items-center gap-1 py-2 px-4 border border-[var(--p-zinc-950)] rounded-lg"
+        >
           <p class="font-semibold">Перейти в каталог</p>
           <vue-feather type="corner-down-left" class="w-4" />
         </router-link>
@@ -31,9 +34,10 @@ import { useFavorites } from '@/stores/favoritesProducts'
 import Product from '@/components/product/Product.vue'
 import Title from '@/components/title/Title.vue'
 import Loader from '@/components/loader/Loader.vue'
+import Skeleton from 'primevue/skeleton'
 
 export default {
-  components: { Product, Title, Loader },
+  components: { Product, Title, Loader, Skeleton },
 
   setup() {
     // data
@@ -51,5 +55,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

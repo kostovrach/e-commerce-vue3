@@ -27,23 +27,18 @@ export default {
 
   setup() {
     // data
-    const productStore = useProducts()
+    const productsStore = useProducts()
 
     // computed
     const pending = computed(() => {
-      return productStore.pending
+      return productsStore.pending
     })
     const products = computed(() => {
-      return productStore.products
+      return productsStore.products
     })
 
-    // methods
-    const { getData } = productStore
-
     // hooks
-    onMounted(async () => {
-      await getData()
-
+    onMounted( () => {
       if (localStorage.getItem('favorites')) {
         const items = JSON.parse(localStorage.getItem('favorites'))
 

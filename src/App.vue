@@ -2,7 +2,7 @@
   <TheHeader />
   <main class="grow container py-8 px-4 mx-auto">
     <RouterView />
-    <Toast position="bottom-right">
+    <Toast position="bottom-right" :dt="{ contrast: { background: 'var(--p-zinc-950)' } }">
       <template #message="slotProps">
         <div class="flex items-center gap-4 w-full">
           <vue-feather
@@ -23,6 +23,8 @@
 import { onMounted } from 'vue'
 import { useFavorites } from '@/stores/favoritesProducts'
 import { useCart } from './stores/cartProducts'
+import { useProducts } from './stores/products'
+import { useCategories } from '@/stores/categories'
 
 import Toast from 'primevue/toast'
 import TheHeader from '@/components/TheHeader.vue'
@@ -34,14 +36,22 @@ export default {
     // data
     const favoritesStore = useFavorites()
     const cartStore = useCart()
+    const productsStore = useProducts()
+    const categoriesStore = useCategories()
 
     // methods
-    const { getData } = favoritesStore
+    const { getData } = productsStore
+    const { getDataFavorites } = favoritesStore
     const { getDataCart } = cartStore
+    const { getDataCategories } = categoriesStore
 
     onMounted(() => {
-      getData()
-      getDataCart()
+      setTimeout(() => {
+        getData()
+        getDataFavorites()
+        getDataCart()
+        getDataCategories()
+      }, 1500)
     })
   },
 }

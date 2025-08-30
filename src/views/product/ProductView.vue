@@ -1,7 +1,22 @@
 <template>
   <div>
     <Title>{{ product.title }}</Title>
-    <Loader v-if="pending" />
+    <div v-if="pending" class="grid grid-cols-2 opacity-50">
+      <Skeleton size="40rem" borderRadius="16px"></Skeleton>
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-4">
+          <Skeleton borderRadius="16px"></Skeleton>
+          <Skeleton borderRadius="16px"></Skeleton>
+          <Skeleton borderRadius="16px"></Skeleton>
+          <Skeleton borderRadius="16px"></Skeleton>
+        </div>
+        <div class="flex flex-col gap-4">
+          <Skeleton width="15rem" borderRadius="16px"></Skeleton>
+          <Skeleton width="10rem" borderRadius="16px"></Skeleton>
+        </div>
+        <Skeleton height="3rem" borderRadius="16px"></Skeleton>
+      </div>
+    </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-16 h-full mt-16">
       <div class="flex items-center justify-center">
@@ -137,8 +152,8 @@ export default {
       addProduct(item)
     }
 
-    onMounted(async () => {
-      await getData(route.params.id)
+    onMounted( () => {
+      getData(route.params.id)
 
       if (localStorage.getItem('favorites')) {
         const items = JSON.parse(localStorage.getItem('favorites'))
@@ -160,5 +175,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

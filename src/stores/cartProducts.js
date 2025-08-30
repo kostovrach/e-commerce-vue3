@@ -22,7 +22,7 @@ export const useCart = defineStore('cart', () => {
       }
 
       pending.value = false
-    }, 1000)
+    }, 1500)
   }
 
   const addProduct = (item) => {

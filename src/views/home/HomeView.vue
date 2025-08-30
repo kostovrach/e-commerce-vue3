@@ -122,7 +122,7 @@ export default {
     })
 
     // methods
-    const { getData } = categoriesStore
+    const { getDataCategories } = categoriesStore
     const { toggleFavorite } = favoritesStore
     const { addProduct } = cartStore
 
@@ -165,9 +165,7 @@ export default {
     }
 
     // hooks
-    onMounted(async () => {
-      await getData()
-
+    onMounted( () => {
       if (localStorage.getItem('favorites')) {
         const items = JSON.parse(localStorage.getItem('favorites'))
 
