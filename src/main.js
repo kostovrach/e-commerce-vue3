@@ -1,48 +1,47 @@
-import './assets/main.css'
+import './assets/main.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import VueFeather from 'vue-feather'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import VueFeather from 'vue-feather';
 
-import App from './App.vue'
-import router from './router'
-import PrimeVue from 'primevue/config'
-import Nora from '@primeuix/themes/nora'
-import { definePreset } from '@primeuix/themes'
+import App from './App.vue';
+import router from './router';
+import PrimeVue from 'primevue/config';
+import Nora from '@primeuix/themes/nora';
+import { definePreset } from '@primeuix/themes';
 import ToastService from 'primevue/toastservice';
 
-const app = createApp(App)
+const app = createApp(App);
 const preset = definePreset(Nora, {
-  semantic: {
-    primary: {
-      50: '{zinc.50}',
-      100: '{zinc.100}',
-      200: '{zinc.200}',
-      300: '{zinc.300}',
-      400: '{zinc.400}',
-      500: '{zinc.500}',
-      600: '{zinc.600}',
-      700: '{zinc.700}',
-      800: '{zinc.800}',
-      900: '{zinc.900}',
-      950: '{zinc.950}',
+    semantic: {
+        primary: {
+            50: '{zinc.50}',
+            100: '{zinc.100}',
+            200: '{zinc.200}',
+            300: '{zinc.300}',
+            400: '{zinc.400}',
+            500: '{zinc.500}',
+            600: '{zinc.600}',
+            700: '{zinc.700}',
+            800: '{zinc.800}',
+            900: '{zinc.900}',
+            950: '{zinc.950}',
+        },
     },
-  },
-})
+});
 
-app.use(createPinia())
-app.use(router),
-app.use(ToastService);
+app.use(createPinia());
+(app.use(router), app.use(ToastService));
 app.use(PrimeVue, {
-  theme: {
-    preset: preset,
-    options: {
-      darkModeSelector: false,
-      cssLayer: false,
+    theme: {
+        preset: preset,
+        options: {
+            darkModeSelector: false,
+            cssLayer: false,
+        },
     },
-  },
-})
+});
 
-app.component(VueFeather.name, VueFeather)
+app.component(VueFeather.name, VueFeather);
 
-app.mount('#app')
+app.mount('#app');

@@ -1,42 +1,42 @@
-import { ref, computed } from 'vue'
-import { defineStore, acceptHMRUpdate } from 'pinia'
+import { ref, computed } from 'vue';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 export const useFavorites = defineStore('favorites', () => {
-  const pending = ref(true)
-  const products = ref([])
-  const counter = computed(() => {
-    return products.value.length
-  })
+    const pending = ref(true);
+    const products = ref([]);
+    const counter = computed(() => {
+        return products.value.length;
+    });
 
-  const getDataFavorites = () => {
-    setTimeout(() => {
-      if (localStorage.getItem('favorites')) {
-        products.value = JSON.parse(localStorage.getItem('favorites'))
-      } else {
-        products.value = []
-      }
+    const getDataFavorites = () => {
+        setTimeout(() => {
+            if (localStorage.getItem('favorites')) {
+                products.value = JSON.parse(localStorage.getItem('favorites'));
+            } else {
+                products.value = [];
+            }
 
-      pending.value = false
-    }, 1500)
-  }
+            pending.value = false;
+        }, 1500);
+    };
 
-  const toggleFavorite = (item) => {
-    if (products.value.find((el) => el.id === item.id)) {
-      const index = products.value.findIndex((el) => el.id === item.id)
+    const toggleFavorite = (item) => {
+        if (products.value.find((el) => el.id === item.id)) {
+            const index = products.value.findIndex((el) => el.id === item.id);
 
-      products.value.splice(index, 1)
-    } else {
-      item.isFavorite = true
+            products.value.splice(index, 1);
+        } else {
+            item.isFavorite = true;
 
-      products.value.push(item)
-    }
+            products.value.push(item);
+        }
 
-    localStorage.setItem('favorites', JSON.stringify(products.value))
-  }
+        localStorage.setItem('favorites', JSON.stringify(products.value));
+    };
 
-  return { pending, products, counter, getDataFavorites, toggleFavorite }
-})
+    return { pending, products, counter, getDataFavorites, toggleFavorite };
+});
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useFavorites, import.meta.hot))
+    import.meta.hot.accept(acceptHMRUpdate(useFavorites, import.meta.hot));
 }
