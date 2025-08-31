@@ -79,6 +79,7 @@
 <script>
 import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { useProducts } from '@/stores/products';
 import { useProduct } from '@/stores/product';
 import { useFavorites } from '@/stores/favoritesProducts';
 import { useCart } from '@/stores/cartProducts';
@@ -94,6 +95,7 @@ export default {
 
     setup() {
         // data
+        const productsStore = useProducts();
         const productStore = useProduct();
         const favoritesStore = useFavorites();
         const cartStore = useCart();
@@ -109,7 +111,8 @@ export default {
         });
 
         // methods
-        const { getData } = productStore;
+        const { getData } = productsStore;
+        const { getDataProduct } = productStore;
         const { toggleFavorite } = favoritesStore;
         const { addProduct } = cartStore;
 
@@ -151,8 +154,10 @@ export default {
             addProduct(item);
         };
 
-        onMounted(() => {
-            getData(route.params.id);
+        onMounted(async () => {
+            getDataProduct(route.params.id);
+
+            await getData();
 
             if (localStorage.getItem('favorites')) {
                 const items = JSON.parse(localStorage.getItem('favorites'));

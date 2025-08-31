@@ -7,7 +7,7 @@ export const useProduct = defineStore('product', () => {
     const pending = ref(true);
     const product = ref([]);
 
-    const getData = async (id) => {
+    const getDataProduct = async (id) => {
         try {
             product.value = await getProduct(id);
         } catch (err) {
@@ -17,7 +17,7 @@ export const useProduct = defineStore('product', () => {
         }
     };
 
-    return { pending, product, getData };
+    return { pending, product, getDataProduct };
 });
 
 if (import.meta.hot) {

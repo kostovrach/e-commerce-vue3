@@ -37,8 +37,13 @@ export default {
             return productsStore.products;
         });
 
+        // methods
+        const { getData } = productsStore;
+
         // hooks
-        onMounted(() => {
+        onMounted(async () => {
+            await getData();
+
             if (localStorage.getItem('favorites')) {
                 const items = JSON.parse(localStorage.getItem('favorites'));
 

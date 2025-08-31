@@ -76,6 +76,7 @@
 
 <script>
 import { onMounted, computed } from 'vue';
+import { useProducts } from '@/stores/products';
 import { useCategories } from '@/stores/categories';
 import { useFavorites } from '@/stores/favoritesProducts';
 import { useCart } from '@/stores/cartProducts';
@@ -92,6 +93,7 @@ export default {
 
     setup() {
         // data
+        const productsStore = useProducts();
         const categoriesStore = useCategories();
         const favoritesStore = useFavorites();
         const cartStore = useCart();
@@ -159,8 +161,13 @@ export default {
             addProduct(item);
         };
 
+        // methods
+        const { getData } = productsStore;
+
         // hooks
-        onMounted(() => {
+        onMounted(async () => {
+            await getData();
+
             if (localStorage.getItem('favorites')) {
                 const items = JSON.parse(localStorage.getItem('favorites'));
 

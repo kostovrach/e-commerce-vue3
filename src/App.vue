@@ -46,12 +46,10 @@ export default {
         const { getDataCategories } = categoriesStore;
 
         onMounted(() => {
-            setTimeout(() => {
-                getData();
-                getDataFavorites();
-                getDataCart();
-                getDataCategories();
-            }, 1500);
+            getData();
+            getDataFavorites();
+            getDataCart();
+            getDataCategories();
         });
     },
 };

@@ -1,7 +1,7 @@
 <template>
     <header class="sticky top-0 z-10 flex items-center justify-center bg-[var(--p-zinc-950)]">
         <div class="container flex w-full items-center justify-between px-4 py-3">
-            <router-link to="/" class="flex items-center gap-4">
+            <router-link to="/" class="flex items-center gap-2">
                 <img class="w-14" src="/logo.svg" alt="" />
                 <span class="text-2xl font-semibold text-[var(--p-zinc-200)]">E-commerce</span>
             </router-link>
